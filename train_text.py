@@ -1,4 +1,3 @@
-from pathlib import Path
 import os, sys
 os.environ["CUDA_VISIBLE_DEVICES"]="0"
 import torch
@@ -90,11 +89,6 @@ if newline_favor_len > 0:
 
 train_data = Dataset.from_list([tokenize(x) for x in text_chunks])
 del text_chunks
-
-if Path(f"{lora_file_path}/adapter_model.bin").is_file():
-    print("Loading existing LoRA data...")
-    state_dict_peft = torch.load(f"{lora_file_path}/adapter_model.bin")
-    set_peft_model_state_dict(lora_model, state_dict_peft)
 
 trainer = transformers.Trainer(
     model=lora_model, 

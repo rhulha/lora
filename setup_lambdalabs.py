@@ -56,10 +56,16 @@ def compile_bits_and_bytes():
 def upload_training_data():
     run_cmd("wget " + training_data_url)
 
+def upload_train_py():
+    sftp = ssh.open_sftp()
+    sftp.put("train_text.py", '/home/ubuntu/' + "train_text.py")
+    sftp.close()
+
 run_basic_setup()
 setup_LD_LIBRARY_PATH()
 compile_bits_and_bytes()
 upload_training_data()
+upload_train_py()
 
 print(ip)
 
